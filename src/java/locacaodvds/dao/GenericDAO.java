@@ -86,7 +86,8 @@ public class GenericDAO <Model extends BaseEntity> extends DAO<Model>{
            newModel = setModelAtributes(rs, newModel);
            models.add((Model) newModel);
         }
-        
+        preparedStatement.close();
+        rs.close();
         return models;
     }
 
@@ -105,6 +106,8 @@ public class GenericDAO <Model extends BaseEntity> extends DAO<Model>{
            model = setModelAtributes(rs, model);
         }
         
+        preparedStatement.close();
+        rs.close();
         return (Model) model;
     }
     
@@ -123,7 +126,7 @@ public class GenericDAO <Model extends BaseEntity> extends DAO<Model>{
                 Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-       
+  
         return (Model)model;
     }
     private void setPreparedStatementValues(PreparedStatement stmt, Model model){
@@ -134,7 +137,7 @@ public class GenericDAO <Model extends BaseEntity> extends DAO<Model>{
             try {
                 Field field = model.getClass().getDeclaredField(columns[i]);             
                 field.setAccessible(true);    
-                System.out.println("columns["+ i + "] = "+ columns[i]+ " | value = " + field.get(model) );
+                //System.out.println("columns["+ i + "] = "+ columns[i]+ " | value = " + field.get(model) );
                 stmt.setObject(i+1, field.get(model));
             } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | SQLException ex) {
                 Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);

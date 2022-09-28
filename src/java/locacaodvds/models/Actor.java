@@ -15,6 +15,7 @@ public class Actor extends BaseEntity {
     private String surname;
     private Date premiereDate;
 
+
     public String getName() {
         return name;
     }
@@ -38,6 +39,7 @@ public class Actor extends BaseEntity {
     public void setPremiereDate(Date premiereDate) {
         this.premiereDate = premiereDate;
     }
+    
     
     @Override
     public String getColumnsName() {

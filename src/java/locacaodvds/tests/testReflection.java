@@ -17,14 +17,14 @@ public class testReflection {
         
         Actor actor = new Actor();
         
-        actor.setName("Gabriela");
-        actor.setSurname("Lima");
+        actor.setName("Mateus");
+        actor.setSurname("Santos");
         actor.setPremiereDate(new Date(22, 2, 3));
         System.out.println(actor.getColumnsName());
-        actorServices.insert(actor);
-        //actorServices.ListAll().forEach( ac ->{
-          //  System.out.println(ac.getName());
-        //});
+        //actorServices.insert(actor);
+        actorServices.ListAll().forEach( ac ->{
+           System.out.println(ac.getName());
+        });
         
      
     }
