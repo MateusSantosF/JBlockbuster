@@ -18,7 +18,7 @@ public class Dvd extends BaseEntity{
     private Actor supportingActor;
     private Time duration;
     private Gender gender;
-    private AgeClassification ageClassification;
+    private AgeRating ageClassification;
 
 
     public String getTitle() {
@@ -77,11 +77,11 @@ public class Dvd extends BaseEntity{
         this.gender = gender;
     }
 
-    public AgeClassification getAgeClassification() {
+    public AgeRating getAgeClassification() {
         return ageClassification;
     }
 
-    public void setAgeClassification(AgeClassification ageClassification) {
+    public void setAgeClassification(AgeRating ageClassification) {
         this.ageClassification = ageClassification;
     }
 

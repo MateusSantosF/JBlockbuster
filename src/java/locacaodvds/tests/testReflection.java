@@ -3,7 +3,9 @@ package locacaodvds.tests;
 
 import java.sql.Date;
 import locacaodvds.models.Actor;
+import locacaodvds.models.Gender;
 import locacaodvds.services.ActorServices;
+import locacaodvds.services.GenderServices;
 
 /**
  *
@@ -13,19 +15,16 @@ public class testReflection {
     
     public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
         
-        ActorServices actorServices = new ActorServices();
+
+
+        GenderServices services = new GenderServices();
         
-        Actor actor = new Actor();
+        Gender gender = new Gender();
         
-        actor.setName("Mateus");
-        actor.setSurname("Santos");
-        actor.setPremiereDate(new Date(22, 2, 3));
-        System.out.println(actor.getColumnsName());
-        //actorServices.insert(actor);
-        actorServices.ListAll().forEach( ac ->{
-           System.out.println(ac.getName());
+        gender.setDescription("Genero 3");
+        //services.insert(gender);
+        services.getAll().forEach(t->{
+            System.out.println(t.getDescription());
         });
-        
-     
     }
 }

@@ -3,7 +3,7 @@ package locacaodvds.services;
 
 import java.sql.SQLException;
 import java.util.List;
-import locacaodvds.dao.GenericDAO;
+import locacaodvds.dao.ActorDAO;
 import locacaodvds.models.Actor;
 
 /**
@@ -15,10 +15,10 @@ public class ActorServices {
   
     public void insert(Actor actor){
        
-        GenericDAO<Actor> dao;
+        ActorDAO dao;
         
         try{
-            dao = new GenericDAO<>(Actor::new);
+            dao = new ActorDAO();
             dao.insert(actor);
         }catch(SQLException ex){
             System.out.println(ex);
@@ -27,10 +27,10 @@ public class ActorServices {
     
     public void delete(Actor actor){
        
-        GenericDAO<Actor> dao;
+        ActorDAO dao;
         
         try{
-            dao = new GenericDAO<>(Actor::new);
+            dao = new ActorDAO();
             dao.delete(actor);
         }catch(SQLException ex){
             System.out.println(ex);
@@ -39,10 +39,10 @@ public class ActorServices {
     
      public void update(Actor actor){
        
-        GenericDAO<Actor> dao;
+        ActorDAO dao;
         
         try{
-            dao = new GenericDAO<>(Actor::new);
+            dao = new ActorDAO();
             dao.update(actor);
         }catch(SQLException ex){
             System.out.println(ex);
@@ -51,10 +51,10 @@ public class ActorServices {
     
     public Actor getById(int id){
        
-        GenericDAO<Actor> dao;
+        ActorDAO dao;
         
         try{
-            dao = new GenericDAO<>( Actor::new);
+            dao = new ActorDAO();
             return dao.getById(id);
         }catch(SQLException ex){
             System.out.println(ex);
@@ -64,9 +64,9 @@ public class ActorServices {
     
      public List<Actor> ListAll(){
        
-        GenericDAO<Actor> dao;    
+        ActorDAO dao;    
         try{
-            dao = new GenericDAO<>( Actor::new);
+            dao = new ActorDAO();
             return dao.listAll();
         }catch(SQLException ex){
             System.out.println(ex);

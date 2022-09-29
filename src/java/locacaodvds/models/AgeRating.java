@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
  *
  * @author Mateus Santos & João Pedro
  */
-public class AgeClassification extends BaseEntity {
+public class AgeRating extends BaseEntity {
     
     private String Description;
 

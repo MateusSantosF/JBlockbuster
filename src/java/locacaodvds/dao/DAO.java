@@ -13,10 +13,8 @@ import locacaodvds.jdbc.ConnectionFactory;
  */
 public abstract class DAO<Model> {
     
-
     private final Connection connection;
 
-  
     public DAO() throws SQLException {
         connection = ConnectionFactory.getConnection();
 
@@ -25,19 +23,18 @@ public abstract class DAO<Model> {
     public Connection getConnection() {
         return connection;
     }
-
-
+    
     public void closeConnection() throws SQLException {
         connection.close();
     }
  
-    public abstract void insert( Model obj ) throws SQLException;
+    public abstract void insert( Model model ) throws SQLException;
   
-    public abstract void update( Model obj ) throws SQLException;
+    public abstract void update( Model model ) throws SQLException;
 
-    public abstract void delete( Model obj ) throws SQLException;
+    public abstract void delete( Model model ) throws SQLException;
   
-    public abstract <Model> List<Model> listAll() throws SQLException;
+    public abstract List<Model> listAll() throws SQLException;
 
-    public abstract <Model> Model getById( int id ) throws SQLException;
+    public abstract Model getById( int id ) throws SQLException;
 }
