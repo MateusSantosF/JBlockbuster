@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS locacao_dvds;
+CREATE DATABASE IF NOT EXISTS locacao_dvds;
+USE locacao_dvds;
+
 CREATE TABLE `locacao_dvds`.`actor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
