@@ -13,7 +13,7 @@ import locacaodvds.models.AgeRating;
 public class AgeRatingServices {
 
     
-     public List<AgeRating> ListAll(){
+     public List<AgeRating> getAll(){
        
         AgeRatingDAO dao = null;    
         try{

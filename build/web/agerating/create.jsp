@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Genders</title>
+        <title>Age Rating</title>
     </head>
 
     <body>
@@ -26,7 +26,7 @@
                     <li>DvD's</li>
                     <li>Actors</li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
-                    <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
+                    <li>Age Rating</li>
                 </ul>
             </nav>
         </header>
@@ -34,10 +34,10 @@
         <main>
             <div class="container form">
                 
-                <form method="post" action="${cp}/gender">
+                <form method="post" action="${cp}/agerating">
                     <input name="action" type="hidden" value="insert"/>
                     
-                    <h2>CREATE NEW GENDER</h2>
+                    <h2>CREATE NEW AGE RATING</h2>
                     <div class="input-group">
                         <label for="description" class="sr-only">Description:</label>
                         <input id="description"

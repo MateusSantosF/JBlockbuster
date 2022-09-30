@@ -43,10 +43,11 @@ public class AgeRatingServlet extends HttpServlet {
                         a.setDescription(description);
                         dao.insert(a);
                         
-                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        disp = request.getRequestDispatcher(
+                        "/agerating/list.jsp" );
                         break;
                     }
-                case "change":
+                case "update":
                     {
                         int id = Integer.parseInt(request.getParameter("id"));
                         String description = request.getParameter("description");
@@ -54,8 +55,8 @@ public class AgeRatingServlet extends HttpServlet {
                         a.setId(id);
                         a.setDescription(description);
                         dao.update(a);
-                        
-                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        disp = request.getRequestDispatcher(
+                        "/agerating/list.jsp" );
                         break;
                     }
                 case "delete":
@@ -64,22 +65,26 @@ public class AgeRatingServlet extends HttpServlet {
                         AgeRating a = new AgeRating();
                         a.setId(id);
                         dao.delete(a);
-                        
-                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+
+                        disp = request.getRequestDispatcher(
+                        "/agerating/list.jsp" );
                         break;
                     }
                 default:
                     {
                         int id = Integer.parseInt(request.getParameter("id"));
                         AgeRating a = dao.getById(id);
-                        request.setAttribute("ageRating", a);
+                        request.setAttribute("agerating", a);
                         if (action.equals("prepareChange")) {
-                            
-                            // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                            disp = request.getRequestDispatcher("/agerating/edit.jsp" );
+                          
                         } else if (action.equals("prepareDelete")) {
-                            
-                            // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-                        }       break;
+                            disp = request.getRequestDispatcher("/agerating/delete.jsp" );
+                        
+                        }     
+                        
+                        
+                        break;
                     }
             }
 

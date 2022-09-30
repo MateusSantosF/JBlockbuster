@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Actors</title>
+        <title>Genders</title>
     </head>
 
     <body>
@@ -26,7 +26,7 @@
                     <li>DvD's</li>
                     <li>Actors</li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
-                    <li>Age Rating</li>
+                    <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
                 </ul>
             </nav>
         </header>

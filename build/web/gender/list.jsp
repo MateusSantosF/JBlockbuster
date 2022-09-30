@@ -25,7 +25,7 @@
                     <li>DvD's</li>
                     <li>Actors</li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
-                    <li><a href="${cp}/">Age Rating</a></li>
+                    <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
                 </ul>
             </nav>
         </header>

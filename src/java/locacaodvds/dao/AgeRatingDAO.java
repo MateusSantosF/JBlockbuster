@@ -22,7 +22,7 @@ public class AgeRatingDAO extends DAO<AgeRating> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "INSERT INTO " + 
                 "agerating(" + 
-                "    description, " + 
+                "    description) " + 
                 "VALUES( ?);");
         stmt.setString( 1, model.getDescription());
         
@@ -37,8 +37,8 @@ public class AgeRatingDAO extends DAO<AgeRating> {
                 "SET" + 
                 "    description = ? " + 
                 "WHERE id = ?;");
-        stmt.setInt( 1, model.getId());
-        stmt.setString( 2, model.getDescription() );
+        stmt.setInt( 2, model.getId());
+        stmt.setString( 1, model.getDescription() );
         
         stmt.executeUpdate();
         stmt.close();               
@@ -63,8 +63,8 @@ public class AgeRatingDAO extends DAO<AgeRating> {
         List<AgeRating> ageRatings = new ArrayList<>();
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT " + 
-                "    id     " +
-                "    description, " + 
+                "    id,   " +
+                "    description " + 
                 "FROM agerating;");
         
         ResultSet rs = stmt.executeQuery();
@@ -72,7 +72,7 @@ public class AgeRatingDAO extends DAO<AgeRating> {
         while ( rs.next() ) {
             AgeRating ageRating = new AgeRating();
             ageRating.setId(rs.getInt("id"));
-            ageRating.setDescription(rs.getString("decription"));
+            ageRating.setDescription(rs.getString("description"));
             ageRatings.add(ageRating);
         }
         rs.close();
@@ -88,9 +88,9 @@ public class AgeRatingDAO extends DAO<AgeRating> {
         
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT " + 
-                "    id     " +
-                "    description" + 
-                "FROM agerating"+
+                "    id,    " +
+                "    description " + 
+                " FROM agerating "+
                 "WHERE id = ?;");
         
         stmt.setInt(1, id);
@@ -99,7 +99,7 @@ public class AgeRatingDAO extends DAO<AgeRating> {
         while ( rs.next() ) {
             ageRating = new AgeRating();
             ageRating.setId(rs.getInt("id"));
-            ageRating.setDescription(rs.getString("name"));
+            ageRating.setDescription(rs.getString("description"));
         }
         
         rs.close();

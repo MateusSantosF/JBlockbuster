@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Genders</title>
+        <title>Age Rating</title>
     </head>
 
     <body>
@@ -34,10 +34,11 @@
         <main>
             <div class="container form">
                 
-                <form method="post" action="${cp}/gender">
-                    <input name="action" type="hidden" value="insert"/>
+                <form method="post" action="${cp}/agerating">
+                    <input name="action" type="hidden" value="update"/>
+                    <input name="id" type="hidden" value="${requestScope.agerating.id}"/>
                     
-                    <h2>CREATE NEW GENDER</h2>
+                    <h2>EDIT AGE RATING</h2>
                     <div class="input-group">
                         <label for="description" class="sr-only">Description:</label>
                         <input id="description"
@@ -46,10 +47,13 @@
                                required
                                size="1"
                                type="text"
+                               value="${requestScope.agerating.description}"
                                placeholder="Description" />
                     </div>
                     <div class="input-group">
-                        <input type="submit" value="CREATE" />
+                        <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
+                        <input type="submit" value="UPDATE" />
+                        
                     </div>      
                     
                 </form>

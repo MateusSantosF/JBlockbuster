@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Genders</title>
+        <title>Age Rating</title>
     </head>
 
     <body>
@@ -33,25 +33,22 @@
 
         <main>
             <div class="container form">
+                <h2>Really want to delete?</h2>
                 
-                <form method="post" action="${cp}/gender">
-                    <input name="action" type="hidden" value="insert"/>
+                <form method="post" action="${cp}/agerating">
+                    <input name="action" type="hidden" value="delete"/> 
+                    <input name="id" type="hidden" value="${requestScope.agerating.id}"/>
                     
-                    <h2>CREATE NEW GENDER</h2>
+                    <div class="model-info-container">
+                        <ul>
+                            <li><span>Id: </span>${requestScope.agerating.id}</li>
+                            <li><span>Description: </span>${requestScope.agerating.description}</li>
+                        </ul>
+                    <div>
                     <div class="input-group">
-                        <label for="description" class="sr-only">Description:</label>
-                        <input id="description"
-                               name="description"
-                               maxlength="45"
-                               required
-                               size="1"
-                               type="text"
-                               placeholder="Description" />
-                    </div>
-                    <div class="input-group">
-                        <input type="submit" value="CREATE" />
+                         <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
+                        <input type="submit" class="btn-delete" value="DELETE" />
                     </div>      
-                    
                 </form>
             </div>
         </main>
