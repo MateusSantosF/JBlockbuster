@@ -12,64 +12,23 @@ import locacaodvds.models.Dvd;
  */
 public class DvdServices {
     
-  
-    public void insert(Dvd dvd){
-       
-        DvdDAO dao;
-        
-        try{
-            dao = new DvdDAO();
-            dao.insert(dvd);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public void delete(Dvd dvd){
-       
-        DvdDAO dao;
-        
-        try{
-            dao = new DvdDAO();
-            dao.delete(dvd);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-     public void update(Dvd dvd){
-       
-        DvdDAO dao;
-        
-        try{
-            dao = new DvdDAO();
-            dao.update(dvd);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public Dvd getById(int id){
-       
-        DvdDAO dao;
-        
-        try{
-            dao = new DvdDAO();
-            return dao.getById(id);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
     
      public List<Dvd> ListAll(){
        
-        DvdDAO dao;    
+        DvdDAO dao = null;    
         try{
             dao = new DvdDAO();
             return dao.listAll();
         }catch(SQLException ex){
             System.out.println(ex);
+        }finally{
+            if(dao != null){
+                try {
+                    dao.closeConnection();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }  
         }
         return null;
     }

@@ -40,7 +40,7 @@ public class DvdDAO extends DAO<Dvd> {
         stmt.setDate(3, model.getReleaseDate());
         stmt.setInt(4, model.getMainActor().getId());
         stmt.setInt(5, model.getSupportingActor().getId());
-        stmt.setTime(6, model.getDuration());
+        stmt.setLong(6, model.getDuration());
         stmt.setInt(7, model.getGender().getId());
         stmt.setInt(8, model.getAgeClassification().getId());
 
@@ -70,7 +70,7 @@ public class DvdDAO extends DAO<Dvd> {
         stmt.setDate(3, model.getReleaseDate());
         stmt.setInt(4, model.getMainActor().getId());
         stmt.setInt(5, model.getSupportingActor().getId());
-        stmt.setTime(6, model.getDuration());
+        stmt.setLong(6, model.getDuration());
         stmt.setInt(7, model.getGender().getId());
         stmt.setInt(8, model.getAgeClassification().getId());
         stmt.setInt(9, model.getId());
@@ -97,62 +97,71 @@ public class DvdDAO extends DAO<Dvd> {
 
         List<Dvd> dvds = new ArrayList<>();
         PreparedStatement stmt = getConnection().prepareStatement(
-                "SELECT"
-                + "    d.id dvdId, "
-                + "    d.title dvdTitle, "
-                + "    d.releaseYear dvdReleaseYear, "
-                + "    d.releaseDate dvdReleaseDate, "
-                + "    d.duration dvdDuration, "
-                + "    a.id mainActor_id, "
-                + "    a.id supportingActor_id, "
-                + "    a.name mainActor, "
-                + "    a.name supportingActor, "
-                + "    g.id gender_id, "
-                + "    g.description genderDescription, "
-                + "   ag.id ageClassification_id, "
-                + "   ag.description ageClassificationDescription, "
-                + "FROM"
-                + "    dvd d, "
-                + "    actor a, "
-                + "    gender g, "
-                + "    ageClassification ag "
-                + "WHERE"
-                + "    d.actor_id = a.id AND "
-                + "    d.gender_id = g.id AND"
-                + "    d.ageClassification_id = ag.id "
-                + "ORDER BY d.title, d.releaseYear, d.duration;");
+                "SELECT "+
+		"d.id as dvdId,"+
+                "d.title, "+
+                "d.releaseYear,"+ 
+                "d.releaseDate, "+
+                "d.duration,"+
+                "d.mainActorFK, "+
+                "d.supportingActorFK,"+ 
+                "d.genderFK, "+
+                "d.ageRatingFK,"+
+                "g.id as genderId,"+
+                "g.description as genderDescription,"+
+                "ag.id as ageRatingId,"+
+                "ag.description ageRatingDescription,"+
+                    "(SELECT id from actor where actor.id = mainActorFK) as mainActorId,"+
+                    "(SELECT name from actor where actor.id = mainActorFK) as mainActorName,"+
+                    "(SELECT surname from actor where actor.id = mainActorFK) as mainActorSurname,"+
+                    "(SELECT premiereDate from actor where actor.id = mainActorFK) as mainActorPremiereDate,"+
+                    "(SELECT id from actor where actor.id = supportingActorFK) as supportingActorId,"+
+                    "(SELECT name from actor where actor.id = supportingActorFK) as supportingActorName,"+
+                    "(SELECT surname from actor where actor.id = supportingActorFK) as supportingActorSurname,"+
+                    "(SELECT premiereDate from actor where actor.id = supportingActorFK) as supportingActorPremiereDate "+
+                "FROM dvd d, gender g, ageRating ag "+
+                "WHERE g.id = d.genderFK AND ag.id = d.ageRatingFK;");
 
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
             Dvd dvd = new Dvd();
-            Actor actor = new Actor();
+            Actor mainActor = new Actor();
+            Actor supportingActor = new Actor();
             Gender gender = new Gender();
             AgeRating ageRating = new AgeRating();
 
-            dvd.setId(rs.getInt("dvdId"));
-            dvd.setTitle(rs.getString("dvdTitle"));
-            dvd.setReleaseYear(rs.getString("dvdReleaseYear"));
-            dvd.setReleaseDate(rs.getDate("dvdReleaseDate"));
-            dvd.setDuration(rs.getTime("dvdDuration"));
-            dvd.setMainActor(actor);
-            dvd.setSupportingActor(actor);
-            dvd.setGender(gender);
-            dvd.setAgeClassification(ageRating);
-
-            actor.setId(rs.getInt("actor_id"));
-            actor.setName(rs.getString("actorName"));
-            actor.setSurname(rs.getString("actorSurname"));
-            actor.setPremiereDate(rs.getDate("actorPremiereDate"));
+       
+            mainActor.setId(rs.getInt("mainActorId"));
+            mainActor.setName(rs.getString("mainActorName"));
+            mainActor.setSurname(rs.getString("mainActorSurname"));
+            mainActor.setPremiereDate(rs.getDate("mainActorPremiereDate"));
+            
+            supportingActor.setId(rs.getInt("supportingActorId"));
+            supportingActor.setName(rs.getString("supportingActorName"));
+            supportingActor.setSurname(rs.getString("supportingActorSurname"));
+            supportingActor.setPremiereDate(rs.getDate("supportingActorPremiereDate"));
 
             gender.setId(rs.getInt("genderId"));
             gender.setDescription(rs.getString("genderDescription"));
 
-            ageRating.setId(rs.getInt("ageRating_id"));
+            ageRating.setId(rs.getInt("ageRatingId"));
             ageRating.setDescription(rs.getString("ageRatingDescription"));
+            
+            dvd.setId(rs.getInt("dvdId"));
+            dvd.setTitle(rs.getString("title"));
+            dvd.setReleaseYear(rs.getString("releaseYear"));
+            dvd.setReleaseDate(rs.getDate("releaseDate"));
+            dvd.setDuration(rs.getLong("duration"));
+ 
+            dvd.setGender(gender);
+            dvd.setAgeClassification(ageRating);
+            dvd.setMainActor(mainActor);
+            dvd.setSupportingActor(supportingActor);
 
             dvds.add(dvd);
         }
+        
         rs.close();
         stmt.close();
 
@@ -165,30 +174,30 @@ public class DvdDAO extends DAO<Dvd> {
         Dvd dvd = null;
 
         PreparedStatement stmt = getConnection().prepareStatement(
-                "SELECT"
-                + "    d.id dvdId, "
-                + "    d.title dvdTitle, "
-                + "    d.releaseYear dvdReleaseYear, "
-                + "    d.releaseDate dvdReleaseDate, "
-                + "    d.duration dvdDuration, "
-                + "    a.id mainActor_id, "
-                + "    a.id supportingActor_id, "
-                + "    a.name mainActor, "
-                + "    a.name supportingActor, "
-                + "    g.id gender_id, "
-                + "    g.description genderDescription, "
-                + "   ag.id ageClassification_id, "
-                + "   ag.description ageClassificationDescription, "
-                + "FROM"
-                + "    dvd d, "
-                + "    actor a, "
-                + "    gender g, "
-                + "    ageClassification ag "
-                + "WHERE"
-                + "    d.actor_id = a.id AND "
-                + "    d.gender_id = g.id AND"
-                + "    d.ageClassification_id = ag.id "
-                + "ORDER BY d.title, d.releaseYear, d.duration;");
+                "SELECT "+
+		"d.id as dvdId,"+
+                "d.title, "+
+                "d.releaseYear,"+ 
+                "d.releaseDate, "+
+                "d.duration,"+
+                "d.mainActorFK, "+
+                "d.supportingActorFK,"+ 
+                "d.genderFK, "+
+                "d.ageRatingFK,"+
+                "g.id as genderId,"+
+                "g.description as genderDescription,"+
+                "ag.id as ageRatingId,"+
+                "ag.description ageRatingDescription,"+
+                    "(SELECT id from actor where actor.id = mainActorFK) as mainActorId,"+
+                    "(SELECT name from actor where actor.id = mainActorFK) as mainActorName,"+
+                    "(SELECT surname from actor where actor.id = mainActorFK) as mainActorSurname,"+
+                    "(SELECT premiereDate from actor where actor.id = mainActorFK) as mainActorPremiereDate,"+
+                    "(SELECT id from actor where actor.id = supportingActorFK) as supportingActorId,"+
+                    "(SELECT name from actor where actor.id = supportingActorFK) as supportingActorName,"+
+                    "(SELECT surname from actor where actor.id = supportingActorFK) as supportingActorSurname,"+
+                    "(SELECT premiereDate from actor where actor.id = supportingActorFK) as supportingActorPremiereDate "+
+                "FROM dvd d, gender g, ageRating ag "+
+                "WHERE g.id = d.genderFK AND ag.id = d.ageRatingFK AND d.id = ?;");
 
         stmt.setInt(1, id);
 
@@ -197,31 +206,37 @@ public class DvdDAO extends DAO<Dvd> {
         if (rs.next()) {
 
             dvd = new Dvd();
-            Actor actor = new Actor();
+            Actor mainActor = new Actor();
+            Actor supportingActor = new Actor();
             Gender gender = new Gender();
             AgeRating ageRating = new AgeRating();
-
-            dvd.setId(rs.getInt("dvdId"));
-            dvd.setTitle(rs.getString("dvdTitle"));
-            dvd.setReleaseYear(rs.getString("dvdReleaseYear"));
-            dvd.setReleaseDate(rs.getDate("dvdReleaseDate"));
-            dvd.setDuration(rs.getTime("dvdDuration"));
-            dvd.setMainActor(actor);
-            dvd.setSupportingActor(actor);
-            dvd.setGender(gender);
-            dvd.setAgeClassification(ageRating);
-
-            actor.setId(rs.getInt("actor_id"));
-            actor.setName(rs.getString("actorName"));
-            actor.setSurname(rs.getString("actorSurname"));
-            actor.setPremiereDate(rs.getDate("actorPremiereDate"));
+ 
+            mainActor.setId(rs.getInt("mainActorId"));
+            mainActor.setName(rs.getString("mainActorName"));
+            mainActor.setSurname(rs.getString("mainActorSurname"));
+            mainActor.setPremiereDate(rs.getDate("mainActorPremiereDate"));
+            
+            supportingActor.setId(rs.getInt("supportingActorId"));
+            supportingActor.setName(rs.getString("supportingActorName"));
+            supportingActor.setSurname(rs.getString("supportingActorSurname"));
+            supportingActor.setPremiereDate(rs.getDate("supportingActorPremiereDate"));
 
             gender.setId(rs.getInt("genderId"));
             gender.setDescription(rs.getString("genderDescription"));
 
-            ageRating.setId(rs.getInt("ageRating_id"));
+            ageRating.setId(rs.getInt("ageRatingId"));
             ageRating.setDescription(rs.getString("ageRatingDescription"));
-
+            
+            dvd.setId(rs.getInt("dvdId"));
+            dvd.setTitle(rs.getString("title"));
+            dvd.setReleaseYear(rs.getString("releaseYear"));
+            dvd.setReleaseDate(rs.getDate("releaseDate"));
+            dvd.setDuration(rs.getLong("duration"));
+ 
+            dvd.setGender(gender);
+            dvd.setAgeClassification(ageRating);
+            dvd.setMainActor(mainActor);
+            dvd.setSupportingActor(supportingActor);
         }
 
         rs.close();

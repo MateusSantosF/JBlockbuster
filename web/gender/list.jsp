@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
-<c:set var="prefixo" value="actors?action="/>
+<c:set var="prefix" value="gender?action="/>
 
 <!DOCTYPE html>
 <html>
@@ -58,10 +58,11 @@
                                     <td>${gender.description}</td>
                                     <td>
                                         <div class="buttons-contianer">
-                                            <a class="btn">
+                                            <a class="btn" href="${cp}/${prefix}prepareChange&id=${gender.id}">
                                                 <img src="${cp}/src/images/edit.svg">
                                             </a>
-                                            <a class="btn">
+                                            <a class="btn"
+                                               href="${cp}/${prefix}prepareDelete&id=${gender.id}">
                                                 <img src="${cp}/src/images/delete.svg">
                                             </a>
                                         </div>

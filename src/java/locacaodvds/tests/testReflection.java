@@ -1,11 +1,12 @@
 
 package locacaodvds.tests;
 
-import java.sql.Date;
-import locacaodvds.models.Actor;
-import locacaodvds.models.Gender;
-import locacaodvds.services.ActorServices;
-import locacaodvds.services.GenderServices;
+
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import locacaodvds.dao.DvdDAO;
+
 
 /**
  *
@@ -17,14 +18,16 @@ public class testReflection {
         
 
 
-        GenderServices services = new GenderServices();
-        
-        Gender gender = new Gender();
-        
-        gender.setDescription("Genero 3");
-        //services.insert(gender);
-        services.getAll().forEach(t->{
-            System.out.println(t.getDescription());
-        });
+        DvdDAO dAO = null;
+        try {
+            dAO = new DvdDAO();
+             System.out.println(dAO.getById(2).getTitle());
+        } catch (SQLException ex) {
+            Logger.getLogger(testReflection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+
+       
+      
     }
 }

@@ -21,62 +21,67 @@ public class GenderServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
-        String action = request.getParameter("action");
+        
+   
+        String action = request.getParameter("action");   
         GenderDAO dao = null;
         RequestDispatcher disp = null;
+ 
 
         try {
-
             dao = new GenderDAO();
-
-            if (action.equals("insert")) {
-
-                String description = request.getParameter("description");
-
-                Gender g = new Gender();
-
-                g.setDescription(description);
-
-                dao.insert(g);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else if (action.equals("change")) {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-                String description = request.getParameter("description");
-
-                Gender g = new Gender();
-
-                g.setId(id);
-                g.setDescription(description);
-
-                dao.update(g);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else if (action.equals("delete")) {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                Gender g = new Gender();
-                g.setId(id);
-
-                dao.delete(g);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-                Gender g = dao.getById(id);
-                request.setAttribute("gender", g);
-
-                if (action.equals("prepareChange")) {
-
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-                } else if (action.equals("prepareDelete")) {
-
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-                }
+            switch (action) {
+                case "insert":
+                    {
+                        String description = request.getParameter("description");
+                        Gender g = new Gender();
+                        g.setDescription(description);
+                        dao.insert(g);
+                        
+                        disp = request.getRequestDispatcher(
+                        "/gender/list.jsp" );
+                        break;
+                    }
+                case "update":
+                    {
+               
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        String description = request.getParameter("description");
+                        Gender g = new Gender();
+                        g.setId(id);
+                        g.setDescription(description);
+                        dao.update(g);
+                         
+                        disp = request.getRequestDispatcher(
+                        "/gender/list.jsp" );
+                        break;
+                    }
+                case "delete":
+                    {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        Gender g = new Gender();
+                        g.setId(id);
+                        dao.delete(g);
+                        
+                         disp = request.getRequestDispatcher(
+                        "/gender/list.jsp" );
+                        break;
+                    }
+                default:
+                    {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        Gender g = dao.getById(id);
+                        request.setAttribute("gender", g);
+                        if (action.equals("prepareChange")) {
+                            
+                            disp = request.getRequestDispatcher("/gender/edit.jsp" );
+                        
+                        } else if (action.equals("prepareDelete")) {
+                     
+                            disp = request.getRequestDispatcher("/gender/delete.jsp" );
+                        }       
+                        break;
+                    }
             }
 
         } catch (SQLException exc) {

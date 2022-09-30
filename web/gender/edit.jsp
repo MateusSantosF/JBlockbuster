@@ -35,9 +35,10 @@
             <div class="container form">
                 
                 <form method="post" action="${cp}/gender">
-                    <input name="action" type="hidden" value="insert"/>
+                    <input name="action" type="hidden" value="update"/>
+                    <input name="id" type="hidden" value="${requestScope.gender.id}"/>
                     
-                    <h2>CREATE NEW GENDER</h2>
+                    <h2>EDIT GENDER</h2>
                     <div class="input-group">
                         <label for="description" class="sr-only">Description:</label>
                         <input id="description"
@@ -46,10 +47,13 @@
                                required
                                size="1"
                                type="text"
+                               value="${requestScope.gender.description}"
                                placeholder="Description" />
                     </div>
                     <div class="input-group">
-                        <input type="submit" value="CREATE" />
+                        <a  class="back-btn" href="${cp}/gender/list.jsp">BACK<a/>
+                        <input type="submit" value="UPDATE" />
+                        
                     </div>      
                     
                 </form>

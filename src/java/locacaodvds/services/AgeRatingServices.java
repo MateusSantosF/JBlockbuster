@@ -11,65 +11,24 @@ import locacaodvds.models.AgeRating;
  * @author Mateus Santos & João Pedro
  */
 public class AgeRatingServices {
-    
-  
-    public void insert(AgeRating ageRating){
-       
-        AgeRatingDAO dao;
-        
-        try{
-            dao = new AgeRatingDAO();
-            dao.insert(ageRating);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public void delete(AgeRating ageRating){
-       
-        AgeRatingDAO dao;
-        
-        try{
-            dao = new AgeRatingDAO();
-            dao.delete(ageRating);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-     public void update(AgeRating ageRating){
-       
-        AgeRatingDAO dao;
-        
-        try{
-            dao = new AgeRatingDAO();
-            dao.update(ageRating);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public AgeRating getById(int id){
-       
-        AgeRatingDAO dao;
-        
-        try{
-            dao = new AgeRatingDAO();
-            return dao.getById(id);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
+
     
      public List<AgeRating> ListAll(){
        
-        AgeRatingDAO dao;    
+        AgeRatingDAO dao = null;    
         try{
             dao = new AgeRatingDAO();
             return dao.listAll();
         }catch(SQLException ex){
             System.out.println(ex);
+        }finally{
+            if ( dao != null ) {
+                try {
+                    dao.closeConnection();
+                } catch ( SQLException exc ) {
+                    exc.printStackTrace();
+                }
+            }
         }
         return null;
     }

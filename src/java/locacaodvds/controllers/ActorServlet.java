@@ -23,7 +23,7 @@ import locacaodvds.models.Actor;
  *
  * @author User
  */
-@WebServlet(name = "ActorServlet", urlPatterns = {"/ActorServlet"})
+@WebServlet(name = "ActorServlet", urlPatterns = {"/actor"})
 public class ActorServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,

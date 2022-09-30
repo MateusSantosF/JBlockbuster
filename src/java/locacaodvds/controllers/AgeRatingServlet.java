@@ -20,7 +20,7 @@ import locacaodvds.models.AgeRating;
  *
  * @author User
  */
-@WebServlet(name = "AgeRatingServlet", urlPatterns = {"/AgeRatingServlet"})
+@WebServlet(name = "AgeRatingServlet", urlPatterns = {"/agerating"})
 public class AgeRatingServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
@@ -35,53 +35,52 @@ public class AgeRatingServlet extends HttpServlet {
 
             dao = new AgeRatingDAO();
 
-            if (action.equals("insert")) {
-
-                String description = request.getParameter("description");
-
-                AgeRating a = new AgeRating();
-
-                a.setDescription(description);
-
-                dao.insert(a);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else if (action.equals("change")) {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-                String description = request.getParameter("description");
-
-                AgeRating a = new AgeRating();
-
-                a.setId(id);
-                a.setDescription(description);
-
-                dao.update(a);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else if (action.equals("delete")) {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                AgeRating a = new AgeRating();
-                a.setId(id);
-
-                dao.delete(a);
-
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else {
-
-                int id = Integer.parseInt(request.getParameter("id"));
-                AgeRating a = dao.getById(id);
-                request.setAttribute("ageRating", a);
-
-                if (action.equals("prepareChange")) {
-
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-                } else if (action.equals("prepareDelete")) {
-
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-                }
+            switch (action) {
+                case "insert":
+                    {
+                        String description = request.getParameter("description");
+                        AgeRating a = new AgeRating();
+                        a.setDescription(description);
+                        dao.insert(a);
+                        
+                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        break;
+                    }
+                case "change":
+                    {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        String description = request.getParameter("description");
+                        AgeRating a = new AgeRating();
+                        a.setId(id);
+                        a.setDescription(description);
+                        dao.update(a);
+                        
+                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        break;
+                    }
+                case "delete":
+                    {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        AgeRating a = new AgeRating();
+                        a.setId(id);
+                        dao.delete(a);
+                        
+                        // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        break;
+                    }
+                default:
+                    {
+                        int id = Integer.parseInt(request.getParameter("id"));
+                        AgeRating a = dao.getById(id);
+                        request.setAttribute("ageRating", a);
+                        if (action.equals("prepareChange")) {
+                            
+                            // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        } else if (action.equals("prepareDelete")) {
+                            
+                            // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                        }       break;
+                    }
             }
 
         } catch (SQLException exc) {

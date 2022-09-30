@@ -37,8 +37,9 @@ public class GenderDAO extends DAO<Gender> {
                 "SET" + 
                 "    description = ? " + 
                 "WHERE id = ?;");
-        stmt.setInt( 1, model.getId());
-        stmt.setString( 2, model.getDescription() );
+        stmt.setString( 1, model.getDescription() );
+        stmt.setInt( 2, model.getId());
+        
         
         stmt.executeUpdate();
         stmt.close();               
@@ -89,8 +90,8 @@ public class GenderDAO extends DAO<Gender> {
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT " + 
                 "    id,     " +
-                "    description" + 
-                "FROM gender"+
+                "    description " + 
+                "FROM gender "+
                 "WHERE id = ?;");
         
         stmt.setInt(1, id);
@@ -99,7 +100,7 @@ public class GenderDAO extends DAO<Gender> {
         while ( rs.next() ) {
             gender = new Gender();
             gender.setId(rs.getInt("id"));
-            gender.setDescription(rs.getString("name"));
+            gender.setDescription(rs.getString("description"));
         }
         
         rs.close();

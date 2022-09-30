@@ -16,7 +16,7 @@ public class Dvd extends BaseEntity{
     private Date releaseDate;
     private Actor mainActor;
     private Actor supportingActor;
-    private Time duration;
+    private long duration;
     private Gender gender;
     private AgeRating ageClassification;
 
@@ -41,6 +41,14 @@ public class Dvd extends BaseEntity{
         return releaseDate;
     }
 
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
@@ -61,13 +69,7 @@ public class Dvd extends BaseEntity{
         this.supportingActor = supportingActor;
     }
 
-    public Time getDuration() {
-        return duration;
-    }
 
-    public void setDuration(Time duration) {
-        this.duration = duration;
-    }
 
     public Gender getGender() {
         return gender;

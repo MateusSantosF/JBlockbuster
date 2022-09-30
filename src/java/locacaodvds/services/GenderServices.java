@@ -12,55 +12,7 @@ import locacaodvds.models.Gender;
  */
 public class GenderServices {
     
-  
-    public void insert(Gender gender){
-       
-        GenderDAO dao;
-        
-        try{
-            dao = new GenderDAO();
-            dao.insert(gender);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public void delete(Gender gender){
-       
-        GenderDAO dao;
-        
-        try{
-            dao = new GenderDAO();
-            dao.delete(gender);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-     public void update(Gender gender){
-       
-        GenderDAO dao;
-        
-        try{
-            dao = new GenderDAO();
-            dao.update(gender);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public Gender getById(int id){
-       
-        GenderDAO dao;
-        
-        try{
-            dao = new GenderDAO();
-            return dao.getById(id);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
+ 
     
     public List<Gender> getAll(){
        

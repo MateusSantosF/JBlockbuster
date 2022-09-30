@@ -33,25 +33,22 @@
 
         <main>
             <div class="container form">
+                <h2>Really want to delete?</h2>
                 
                 <form method="post" action="${cp}/gender">
-                    <input name="action" type="hidden" value="insert"/>
+                    <input name="action" type="hidden" value="delete"/> 
+                    <input name="id" type="hidden" value="${requestScope.gender.id}"/>
                     
-                    <h2>CREATE NEW GENDER</h2>
+                    <div class="model-info-container">
+                        <ul>
+                            <li><span>Id: </span>${requestScope.gender.id}</li>
+                            <li><span>Description: </span>${requestScope.gender.description}</li>
+                        </ul>
+                    <div>
                     <div class="input-group">
-                        <label for="description" class="sr-only">Description:</label>
-                        <input id="description"
-                               name="description"
-                               maxlength="45"
-                               required
-                               size="1"
-                               type="text"
-                               placeholder="Description" />
-                    </div>
-                    <div class="input-group">
-                        <input type="submit" value="CREATE" />
+                         <a  class="back-btn" href="${cp}/gender/list.jsp">BACK<a/>
+                        <input type="submit" class="btn-delete" value="DELETE" />
                     </div>      
-                    
                 </form>
             </div>
         </main>
