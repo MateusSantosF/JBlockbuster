@@ -6,51 +6,42 @@ package locacaodvds.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import locacaodvds.dao.ActorDAO;
-import locacaodvds.models.Actor;
+import locacaodvds.dao.AgeRatingDAO;
+import locacaodvds.models.AgeRating;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "ActorServlet", urlPatterns = {"/ActorServlet"})
-public class ActorServlet extends HttpServlet {
+@WebServlet(name = "AgeRatingServlet", urlPatterns = {"/AgeRatingServlet"})
+public class AgeRatingServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
-        ActorDAO dao = null;
+        AgeRatingDAO dao = null;
         RequestDispatcher disp = null;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
 
-            dao = new ActorDAO();
+            dao = new AgeRatingDAO();
 
             if (action.equals("insert")) {
 
-                String name = request.getParameter("name");
-                String surname = request.getParameter("surname");
-                String premiereDate = request.getParameter("premiereDate");
+                String description = request.getParameter("description");
 
-                Actor a = new Actor();
-                a.setName(name);
-                a.setSurname(surname);
-                a.setPremiereDate(Date.valueOf(
-                        LocalDate.parse(premiereDate, dtf)));
+                AgeRating a = new AgeRating();
+
+                a.setDescription(description);
 
                 dao.insert(a);
 
@@ -58,16 +49,12 @@ public class ActorServlet extends HttpServlet {
             } else if (action.equals("change")) {
 
                 int id = Integer.parseInt(request.getParameter("id"));
-                String name = request.getParameter("name");
-                String surname = request.getParameter("surname");
-                String premiereDate = request.getParameter("premiereDate");
+                String description = request.getParameter("description");
 
-                Actor a = new Actor();
+                AgeRating a = new AgeRating();
+
                 a.setId(id);
-                a.setName(name);
-                a.setSurname(surname);
-                a.setPremiereDate(Date.valueOf(
-                        LocalDate.parse(premiereDate, dtf)));
+                a.setDescription(description);
 
                 dao.update(a);
 
@@ -76,7 +63,7 @@ public class ActorServlet extends HttpServlet {
 
                 int id = Integer.parseInt(request.getParameter("id"));
 
-                Actor a = new Actor();
+                AgeRating a = new AgeRating();
                 a.setId(id);
 
                 dao.delete(a);
@@ -85,8 +72,8 @@ public class ActorServlet extends HttpServlet {
             } else {
 
                 int id = Integer.parseInt(request.getParameter("id"));
-                Actor a = dao.getById(id);
-                request.setAttribute("actor", a);
+                AgeRating a = dao.getById(id);
+                request.setAttribute("ageRating", a);
 
                 if (action.equals("prepareChange")) {
 
@@ -96,6 +83,7 @@ public class ActorServlet extends HttpServlet {
                     // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
                 }
             }
+
         } catch (SQLException exc) {
             exc.printStackTrace();
         } finally {
@@ -111,6 +99,7 @@ public class ActorServlet extends HttpServlet {
         if (disp != null) {
             disp.forward(request, response);
         }
+
     }
 
     @Override
@@ -131,7 +120,7 @@ public class ActorServlet extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "ActorServlet";
+        return "AgeRatingServlet";
     }
 
 }

@@ -1,12 +1,15 @@
-
 package locacaodvds.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import locacaodvds.dao.GenderDAO;
+import locacaodvds.models.Gender;
 
 /**
  *
@@ -15,24 +18,89 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "GenderServlet", urlPatterns = {"/gender"})
 public class GenderServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
-       
-       
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+        String action = request.getParameter("action");
+        GenderDAO dao = null;
+        RequestDispatcher disp = null;
+
+        try {
+
+            dao = new GenderDAO();
+
+            if (action.equals("insert")) {
+
+                String description = request.getParameter("description");
+
+                Gender g = new Gender();
+
+                g.setDescription(description);
+
+                dao.insert(g);
+
+                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+            } else if (action.equals("change")) {
+
+                int id = Integer.parseInt(request.getParameter("id"));
+                String description = request.getParameter("description");
+
+                Gender g = new Gender();
+
+                g.setId(id);
+                g.setDescription(description);
+
+                dao.update(g);
+
+                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+            } else if (action.equals("delete")) {
+
+                int id = Integer.parseInt(request.getParameter("id"));
+
+                Gender g = new Gender();
+                g.setId(id);
+
+                dao.delete(g);
+
+                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+            } else {
+
+                int id = Integer.parseInt(request.getParameter("id"));
+                Gender g = dao.getById(id);
+                request.setAttribute("gender", g);
+
+                if (action.equals("prepareChange")) {
+
+                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                } else if (action.equals("prepareDelete")) {
+
+                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                }
+            }
+
+        } catch (SQLException exc) {
+            exc.printStackTrace();
+        } finally {
+            if (dao != null) {
+                try {
+                    dao.closeConnection();
+                } catch (SQLException exc) {
+                    exc.printStackTrace();
+                }
+            }
+        }
+
+        if (disp != null) {
+            disp.forward(request, response);
+        }
+
+    }
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -46,19 +114,16 @@ public class GenderServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(
+            HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "GenderServlet";
+    }
 
 }
