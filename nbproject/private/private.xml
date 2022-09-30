@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/controllers/ActorServlet.java</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/controllers/GenderServlet.java</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/controllers/AgeRatingServlet.java</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/services/DvdServices.java</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/services/AgeRatingServices.java</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/dao/DvdDAO.java</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/services/ActorServices.java</file>
         </group>
     </open-files>
 </project-private>
