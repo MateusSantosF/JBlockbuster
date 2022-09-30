@@ -35,7 +35,8 @@ CREATE TABLE `locacao_dvds`.`actor` (
   INSERT INTO actor (name, surname, premiereDate) VALUES ("Joao", "Pedro", "2022/02/03");
   INSERT INTO agerating (description) VALUES ("Menores de 18 anos");
   INSERT INTO gender (description) VALUES ("Ação");
-  INSERT INTO dvd (title, releaseYear, releaseDate, duration, mainActorFK, supportingActorFk, genderFK, ageRatingFK)
+  INSERT INTO dvd (title, releaseYear, releaseDate, duration, 
+				  mainActorFK, supportingActorFk, genderFK, ageRatingFK)
   VALUES ("A casa", 2022, "2022/03/03", 120, 1,2,1,1);
   
   SELECT * FROM actor;
@@ -69,7 +70,6 @@ CREATE TABLE `locacao_dvds`.`actor` (
 		d.supportingActorFK = a.id AND 
 		d.genderFK= g.id AND
 		d.ageRatingFK = ag.id;
-    
     SELECT 
 		d.id , 
         d.title, 

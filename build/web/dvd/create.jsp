@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Age Rating</title>
+        <title>DvDs</title>
     </head>
 
     <body>
@@ -26,7 +26,7 @@
                     <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
                     <li>Actors</li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
-                    <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
+                    <li>Age Rating</li>
                 </ul>
             </nav>
         </header>
@@ -35,10 +35,9 @@
             <div class="container form">
                 
                 <form method="post" action="${cp}/agerating">
-                    <input name="action" type="hidden" value="update"/>
-                    <input name="id" type="hidden" value="${requestScope.agerating.id}"/>
+                    <input name="action" type="hidden" value="insert"/>
                     
-                    <h2>EDIT AGE RATING</h2>
+                    <h2>CREATE NEW DVD</h2>
                     <div class="input-group">
                         <label for="description" class="sr-only">Description:</label>
                         <input id="description"
@@ -47,13 +46,10 @@
                                required
                                size="1"
                                type="text"
-                               value="${requestScope.agerating.description}"
                                placeholder="Description" />
                     </div>
                     <div class="input-group">
-                        <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
-                        <input type="submit" value="UPDATE" />
-                        
+                        <input type="submit" value="CREATE" />
                     </div>      
                     
                 </form>

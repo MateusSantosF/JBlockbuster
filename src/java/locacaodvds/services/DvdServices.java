@@ -13,7 +13,7 @@ import locacaodvds.models.Dvd;
 public class DvdServices {
     
     
-     public List<Dvd> ListAll(){
+     public List<Dvd> getAll(){
        
         DvdDAO dao = null;    
         try{

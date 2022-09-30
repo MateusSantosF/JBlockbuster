@@ -23,7 +23,7 @@
             </div>
             <nav>
                 <ul>
-                    <li>DvD's</li>
+                     <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
                     <li>Actors</li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
                     <li>Age Rating</li>

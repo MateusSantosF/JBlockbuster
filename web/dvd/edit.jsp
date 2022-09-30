@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>Age Rating</title>
+        <title>DvDs</title>
     </head>
 
     <body>
