@@ -11,8 +11,9 @@ import locacaodvds.models.Actor;
  * @author Mateus Santos & João Pedro
  */
 public class ActorServices {
-      
-     public List<Actor> ListAll(){
+
+    
+     public List<Actor> getAll(){
        
         ActorDAO dao = null;    
         try{
@@ -21,14 +22,13 @@ public class ActorServices {
         }catch(SQLException ex){
             System.out.println(ex);
         }finally{
-            if(dao != null){
+            if ( dao != null ) {
                 try {
                     dao.closeConnection();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                } catch ( SQLException exc ) {
+                    exc.printStackTrace();
                 }
-            }   
-           
+            }
         }
         return null;
     }

@@ -13,7 +13,6 @@ import locacaodvds.models.Gender;
 public class GenderServices {
     
  
-    
     public List<Gender> getAll(){
        
         GenderDAO dao = null;    

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
         <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
-        <title>DvDs</title>
+        <title>Actor</title>
     </head>
 
     <body>
@@ -34,24 +34,46 @@
         <main>
             <div class="container form">
                 
-                <form method="post" action="${cp}/agerating">
+                <form method="post" action="${cp}/actor">
                     <input name="action" type="hidden" value="update"/>
-                    <input name="id" type="hidden" value="${requestScope.agerating.id}"/>
+                    <input name="id" type="hidden" value="${requestScope.actor.id}"/>
                     
-                    <h2>EDIT AGE RATING</h2>
+                    <h2>EDIT ACTOR</h2>
                     <div class="input-group">
-                        <label for="description" class="sr-only">Description:</label>
-                        <input id="description"
-                               name="description"
+                        <label for="name" class="sr-only">Name:</label>
+                        <input id="name"
+                               name="name"
                                maxlength="45"
                                required
                                size="1"
                                type="text"
-                               value="${requestScope.agerating.description}"
-                               placeholder="Description" />
+                               value="${requestScope.actor.name}"
+                               placeholder="Name" />
+                        
+                        <label for="surname" class="sr-only">Surname:</label>
+                        <input id="surname"
+                               name="surname"
+                               maxlength="45"
+                               required
+                               size="1"
+                               type="text"
+                               value="${requestScope.actor.surname}"
+                               placeholder="Surname" />
+                        
+                        <label for="premiereDate" class="sr-only">Premiere Date:</label>
+                        <input id="premiereDate"
+                               name="premiereDate"
+                               maxlength="45"
+                               required
+                               size="1"
+                               type="date"
+                               value="${requestScope.actor.premiereDate}"
+                               onfocus="(this.type='date')",
+                               onblur="(this.type='text')",
+                               placeholder="yyyy-MM-dddd" />
                     </div>
                     <div class="input-group">
-                        <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
+                        <a  class="back-btn" href="${cp}/actor/list.jsp">BACK<a/>
                         <input type="submit" value="UPDATE" />
                         
                     </div>      

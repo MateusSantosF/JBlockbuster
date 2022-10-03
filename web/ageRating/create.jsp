@@ -23,10 +23,10 @@
             </div>
             <nav>
                 <ul>
-                     <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
-                    <li>Actors</li>
+                    <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
+                    <li><a href="${cp}/actor/list.jsp">Actors</a></li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
-                    <li>Age Rating</li>
+                    <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
                 </ul>
             </nav>
         </header>
@@ -34,7 +34,7 @@
         <main>
             <div class="container form">
                 
-                <form method="post" action="${cp}/agerating">
+                <form method="plost" action="${cp}/agerating">
                     <input name="action" type="hidden" value="insert"/>
                     
                     <h2>CREATE NEW AGE RATING</h2>

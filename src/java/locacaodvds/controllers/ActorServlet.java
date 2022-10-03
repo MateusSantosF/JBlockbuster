@@ -54,8 +54,10 @@ public class ActorServlet extends HttpServlet {
 
                 dao.insert(a);
 
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
-            } else if (action.equals("change")) {
+                disp = request.getRequestDispatcher(
+                "/actor/list.jsp" );
+
+            } else if (action.equals("update")) {
 
                 int id = Integer.parseInt(request.getParameter("id"));
                 String name = request.getParameter("name");
@@ -70,8 +72,10 @@ public class ActorServlet extends HttpServlet {
                         LocalDate.parse(premiereDate, dtf)));
 
                 dao.update(a);
+                
+                disp = request.getRequestDispatcher(
+                "/actor/list.jsp" );
 
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
             } else if (action.equals("delete")) {
 
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -80,8 +84,11 @@ public class ActorServlet extends HttpServlet {
                 a.setId(id);
 
                 dao.delete(a);
+                
+                disp = request.getRequestDispatcher(
+                "/actor/list.jsp" );
 
-                // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+
             } else {
 
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -90,10 +97,14 @@ public class ActorServlet extends HttpServlet {
 
                 if (action.equals("prepareChange")) {
 
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                disp = request.getRequestDispatcher(
+                "/actor/edit.jsp" );
+
                 } else if (action.equals("prepareDelete")) {
 
-                    // FALTA ADICIONAR UM REQUEST DISPATCHER AINDA VOU COLOCAR DEPOIS QUE A JSP ESTIVER FEITA :D
+                disp = request.getRequestDispatcher(
+                "/actor/delete.jsp" );
+
                 }
             }
         } catch (SQLException exc) {

@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
-<c:set var="prefix" value="agerating?action="/>
+<c:set var="prefix" value="dvd?action="/>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
             <nav>
                 <ul>
                     <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
-                    <li>Actors</li>
+                    <li><a href="${cp}/actor/list.jsp">Actors</a></li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
                     <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
                 </ul>
@@ -33,8 +33,8 @@
         <main>
             <div class="container">
                 <section class="main-header">
-                    <h2>Genders</h2>
-                    <a class="btn" href="${cp}/agerating/create.jsp">Create New</a>
+                    <h2>Dvds</h2>
+                    <a class="btn" href="${cp}/dvd/create.jsp">Create New</a>
                 </section>
 
                 <section>

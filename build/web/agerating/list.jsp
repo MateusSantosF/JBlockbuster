@@ -23,7 +23,7 @@
             <nav>
                 <ul>
                     <li><a href="${cp}/dvd/list.jsp">DvD's</a></li>
-                    <li>Actors</li>
+                    <li><a href="${cp}/actor/list.jsp">Actors</a></li>
                     <li><a href="${cp}/gender/list.jsp">Genders</a></li>
                     <li><a href="${cp}/agerating/list.jsp">Age Rating</a></li>
                 </ul>
@@ -33,7 +33,7 @@
         <main>
             <div class="container">
                 <section class="main-header">
-                    <h2>Genders</h2>
+                    <h2>Age Rating</h2>
                     <a class="btn" href="${cp}/agerating/create.jsp">Create New</a>
                 </section>
 
