@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/web/actor/edit.jsp</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/dao/AgeRatingDAO.java</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/web/actor/delete.jsp</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/controllers/ActorServlet.java</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/dao/DvdDAO.java</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/web/actor/create.jsp</file>
-            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/src/java/locacaodvds/dao/ActorDAO.java</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/web/dvd/edit.jsp</file>
+            <file>file:/C:/Users/User/Desktop/Capitulo6/JBlockbuster/web/dvd/create.jsp</file>
         </group>
     </open-files>
 </project-private>

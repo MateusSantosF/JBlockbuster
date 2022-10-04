@@ -48,6 +48,8 @@
                                 <th>Duration</th>
                                 <th>Main Actor</th>
                                 <th>Supporting Actor</th>
+                                <th>Gender</th>
+                                <th>Age Rating</th>
                                 <th style="text-align:center;">Actions</th>                             
                             </tr>
                         </thead>
@@ -63,9 +65,11 @@
                                     <td>${dvd.title}</td>
                                     <td>${dvd.releaseYear}</td>
                                     <td>${dvd.releaseDate}</td>
-                                    <td>${dvd.duration} Min</td>
                                     <td>${dvd.mainActor.name}</td>
                                     <td>${dvd.supportingActor.name}</td>
+                                    <td>${dvd.duration} Min</td>
+                                    <td>${dvd.gender.description}</td>
+                                    <td>${dvd.ageRating.description}</td>
                                     <td>
                                         <div class="buttons-contianer">
                                             <a class="btn" href="${cp}/${prefix}prepareChange&id=${agerating.id}">

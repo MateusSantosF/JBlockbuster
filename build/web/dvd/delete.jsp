@@ -41,12 +41,14 @@
                     
                     <div class="model-info-container">
                         <ul>
-                            <li><span>Id: </span>${requestScope.agerating.id}</li>
-                            <li><span>Description: </span>${requestScope.agerating.description}</li>
+                            <li><span>Id: </span>${requestScope.dvd.id}</li>
+                            <li><span>Description: </span>${requestScope.dvd.title}</li>
+                            <li><span>Id: </span>${requestScope.dvd.releaseYear}</li>
+                            <li><span>Description: </span>${requestScope.dvd.releaseDate}</li>
                         </ul>
                     <div>
                     <div class="input-group">
-                         <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
+                         <a  class="back-btn" href="${cp}/dvd/list.jsp">BACK<a/>
                         <input type="submit" class="btn-delete" value="DELETE" />
                     </div>      
                 </form>

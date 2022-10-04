@@ -48,8 +48,10 @@
                                type="text"
                                placeholder="Description" />
                     </div>
-                    <div class="input-group">
+                      <div class="input-group">
+                        <a  class="back-btn" href="${cp}/agerating/list.jsp">BACK<a/>
                         <input type="submit" value="CREATE" />
+                        
                     </div>      
                     
                 </form>

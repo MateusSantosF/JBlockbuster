@@ -73,9 +73,11 @@
                                placeholder="yyyy-MM-dddd" />
                     </div>
                     
-                    <div class="input-group">
+                      <div class="input-group">
+                        <a  class="back-btn" href="${cp}/actor/list.jsp">BACK<a/>
                         <input type="submit" value="CREATE" />
-                    </div>      
+                        
+                    </div>   
                     
                 </form>
             </div>
