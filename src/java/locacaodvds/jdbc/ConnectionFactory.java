@@ -12,6 +12,6 @@ public class ConnectionFactory {
         return DriverManager.getConnection(
                     "jdbc:mariadb://localhost/locacao_dvds", 
                     "root", 
-                    "1234");
+                    "");
     }
 }

@@ -98,29 +98,38 @@ public class DvdDAO extends DAO<Dvd> {
         List<Dvd> dvds = new ArrayList<>();
         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT "+
-		"d.id as dvdId,"+
-                "d.title, "+
-                "d.releaseYear,"+ 
-                "d.releaseDate, "+
-                "d.duration,"+
-                "d.mainActorFK, "+
-                "d.supportingActorFK,"+ 
-                "d.genderFK, "+
-                "d.ageRatingFK,"+
-                "g.id as genderId,"+
-                "g.description as genderDescription,"+
-                "ag.id as ageRatingId,"+
-                "ag.description ageRatingDescription,"+
-                    "(SELECT id from actor where actor.id = mainActorFK) as mainActorId,"+
-                    "(SELECT name from actor where actor.id = mainActorFK) as mainActorName,"+
-                    "(SELECT surname from actor where actor.id = mainActorFK) as mainActorSurname,"+
-                    "(SELECT premiereDate from actor where actor.id = mainActorFK) as mainActorPremiereDate,"+
-                    "(SELECT id from actor where actor.id = supportingActorFK) as supportingActorId,"+
-                    "(SELECT name from actor where actor.id = supportingActorFK) as supportingActorName,"+
-                    "(SELECT surname from actor where actor.id = supportingActorFK) as supportingActorSurname,"+
-                    "(SELECT premiereDate from actor where actor.id = supportingActorFK) as supportingActorPremiereDate "+
-                "FROM dvd d, gender g, ageRating ag "+
-                "WHERE g.id = d.genderFK AND ag.id = d.ageRatingFK;");
+                  "  d.id , "+ 
+                  "  d.title,  "+
+                  "  d.releaseYear,  "+ 
+                   " d.releaseDate,  "+
+                 "   d.duration, "+
+                   " d.mainActorFK,  "+
+                  "  d.supportingActorFK,  "+
+                  "  d.genderFK,  "+
+                   " d.ageRatingFK, "+
+                 "   g.id as genderId, "+
+                  "  g.description as genderDescription, "+
+                  "  ag.id as ageRatingId, "+
+                 "   ag.description as ageRatingDescription, "+
+                 "   a.id, "+
+                 "   a.name, "+
+                 "   a.surname, "+
+                  "  a.premiereDate, "+
+                 "   sa.id, "+
+                 "   sa.name, "+
+                 "   sa.surname, "+
+                 "   sa.premiereDate "+
+                "FROM "+
+                 "   dvd d, "+
+                "    actor a, "+
+                "    actor sa, "+
+                 "   gender g, "+
+                 "   ageRating ag "+
+             "  WHERE "+
+                   " d.mainActorFK = a.id AND  "+
+                  "  d.supportingActorFK = sa.id AND  "+
+                   " d.genderFK= g.id AND "+
+                   " d.ageRatingFK = ag.id; ");
 
         ResultSet rs = stmt.executeQuery();
 
@@ -132,15 +141,15 @@ public class DvdDAO extends DAO<Dvd> {
             AgeRating ageRating = new AgeRating();
 
        
-            mainActor.setId(rs.getInt("mainActorId"));
-            mainActor.setName(rs.getString("mainActorName"));
-            mainActor.setSurname(rs.getString("mainActorSurname"));
-            mainActor.setPremiereDate(rs.getDate("mainActorPremiereDate"));
+            mainActor.setId(rs.getInt("a.id"));
+            mainActor.setName(rs.getString("a.name"));
+            mainActor.setSurname(rs.getString("a.surname"));
+            mainActor.setPremiereDate(rs.getDate("a.premiereDate"));
             
-            supportingActor.setId(rs.getInt("supportingActorId"));
-            supportingActor.setName(rs.getString("supportingActorName"));
-            supportingActor.setSurname(rs.getString("supportingActorSurname"));
-            supportingActor.setPremiereDate(rs.getDate("supportingActorPremiereDate"));
+            supportingActor.setId(rs.getInt("sa.id"));
+            supportingActor.setName(rs.getString("sa.name"));
+            supportingActor.setSurname(rs.getString("sa.surname"));
+            supportingActor.setPremiereDate(rs.getDate("sa.premiereDate"));
 
             gender.setId(rs.getInt("genderId"));
             gender.setDescription(rs.getString("genderDescription"));
@@ -148,11 +157,11 @@ public class DvdDAO extends DAO<Dvd> {
             ageRating.setId(rs.getInt("ageRatingId"));
             ageRating.setDescription(rs.getString("ageRatingDescription"));
             
-            dvd.setId(rs.getInt("dvdId"));
-            dvd.setTitle(rs.getString("title"));
-            dvd.setReleaseYear(rs.getString("releaseYear"));
-            dvd.setReleaseDate(rs.getDate("releaseDate"));
-            dvd.setDuration(rs.getLong("duration"));
+            dvd.setId(rs.getInt("d.id"));
+            dvd.setTitle(rs.getString("d.title"));
+            dvd.setReleaseYear(rs.getString("d.releaseYear"));
+            dvd.setReleaseDate(rs.getDate("d.releaseDate"));
+            dvd.setDuration(rs.getLong("d.duration"));
  
             dvd.setGender(gender);
             dvd.setAgeRating(ageRating);
@@ -173,31 +182,41 @@ public class DvdDAO extends DAO<Dvd> {
 
         Dvd dvd = null;
 
-        PreparedStatement stmt = getConnection().prepareStatement(
+         PreparedStatement stmt = getConnection().prepareStatement(
                 "SELECT "+
-		"d.id as dvdId,"+
-                "d.title, "+
-                "d.releaseYear,"+ 
-                "d.releaseDate, "+
-                "d.duration,"+
-                "d.mainActorFK, "+
-                "d.supportingActorFK,"+ 
-                "d.genderFK, "+
-                "d.ageRatingFK,"+
-                "g.id as genderId,"+
-                "g.description as genderDescription,"+
-                "ag.id as ageRatingId,"+
-                "ag.description ageRatingDescription,"+
-                    "(SELECT id from actor where actor.id = mainActorFK) as mainActorId,"+
-                    "(SELECT name from actor where actor.id = mainActorFK) as mainActorName,"+
-                    "(SELECT surname from actor where actor.id = mainActorFK) as mainActorSurname,"+
-                    "(SELECT premiereDate from actor where actor.id = mainActorFK) as mainActorPremiereDate,"+
-                    "(SELECT id from actor where actor.id = supportingActorFK) as supportingActorId,"+
-                    "(SELECT name from actor where actor.id = supportingActorFK) as supportingActorName,"+
-                    "(SELECT surname from actor where actor.id = supportingActorFK) as supportingActorSurname,"+
-                    "(SELECT premiereDate from actor where actor.id = supportingActorFK) as supportingActorPremiereDate "+
-                "FROM dvd d, gender g, ageRating ag "+
-                "WHERE g.id = d.genderFK AND ag.id = d.ageRatingFK AND d.id = ?;");
+                  "  d.id , "+ 
+                  "  d.title,  "+
+                  "  d.releaseYear,  "+ 
+                   " d.releaseDate,  "+
+                 "   d.duration, "+
+                   " d.mainActorFK,  "+
+                  "  d.supportingActorFK,  "+
+                  "  d.genderFK,  "+
+                   " d.ageRatingFK, "+
+                 "   g.id as genderId, "+
+                  "  g.description as genderDescription, "+
+                  "  ag.id as ageRatingId, "+
+                 "   ag.description as ageRatingDescription, "+
+                 "   a.id, "+
+                 "   a.name, "+
+                 "   a.surname, "+
+                  "  a.premiereDate, "+
+                 "   sa.id, "+
+                 "   sa.name, "+
+                 "   sa.surname, "+
+                 "   sa.premiereDate "+
+                "FROM "+
+                 "   dvd d, "+
+                "    actor a, "+
+                "    actor sa, "+
+                 "   gender g, "+
+                 "   ageRating ag "+
+             "  WHERE "+
+                   " d.mainActorFK = a.id AND  "+
+                   "  d.supportingActorFK = sa.id AND  "+
+                   " d.genderFK= g.id AND "+
+                   " d.id = ? AND "+
+                   " d.ageRatingFK = ag.id; ");
 
         stmt.setInt(1, id);
 
@@ -211,15 +230,15 @@ public class DvdDAO extends DAO<Dvd> {
             Gender gender = new Gender();
             AgeRating ageRating = new AgeRating();
  
-            mainActor.setId(rs.getInt("mainActorId"));
-            mainActor.setName(rs.getString("mainActorName"));
-            mainActor.setSurname(rs.getString("mainActorSurname"));
-            mainActor.setPremiereDate(rs.getDate("mainActorPremiereDate"));
+            mainActor.setId(rs.getInt("a.id"));
+            mainActor.setName(rs.getString("a.name"));
+            mainActor.setSurname(rs.getString("a.surname"));
+            mainActor.setPremiereDate(rs.getDate("a.premiereDate"));
             
-            supportingActor.setId(rs.getInt("supportingActorId"));
-            supportingActor.setName(rs.getString("supportingActorName"));
-            supportingActor.setSurname(rs.getString("supportingActorSurname"));
-            supportingActor.setPremiereDate(rs.getDate("supportingActorPremiereDate"));
+            supportingActor.setId(rs.getInt("sa.id"));
+            supportingActor.setName(rs.getString("sa.name"));
+            supportingActor.setSurname(rs.getString("sa.surname"));
+            supportingActor.setPremiereDate(rs.getDate("sa.premiereDate"));
 
             gender.setId(rs.getInt("genderId"));
             gender.setDescription(rs.getString("genderDescription"));
@@ -227,11 +246,11 @@ public class DvdDAO extends DAO<Dvd> {
             ageRating.setId(rs.getInt("ageRatingId"));
             ageRating.setDescription(rs.getString("ageRatingDescription"));
             
-            dvd.setId(rs.getInt("dvdId"));
-            dvd.setTitle(rs.getString("title"));
-            dvd.setReleaseYear(rs.getString("releaseYear"));
-            dvd.setReleaseDate(rs.getDate("releaseDate"));
-            dvd.setDuration(rs.getLong("duration"));
+            dvd.setId(rs.getInt("d.id"));
+            dvd.setTitle(rs.getString("d.title"));
+            dvd.setReleaseYear(rs.getString("d.releaseYear"));
+            dvd.setReleaseDate(rs.getDate("d.releaseDate"));
+            dvd.setDuration(rs.getLong("d.duration"));
  
             dvd.setGender(gender);
             dvd.setAgeRating(ageRating);

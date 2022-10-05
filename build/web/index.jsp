@@ -84,9 +84,8 @@
                                                href="${cp}/${prefix}prepareDelete&id=${dvd.id}">
                                                 <img src="${cp}/src/images/delete.svg">
                                             </a>
-                                        </div>
-                                       
-                                    </td>
+                                        </div>         
+                                    </td>                                   
                                 </tr>
                              </c:forEach>
                             
