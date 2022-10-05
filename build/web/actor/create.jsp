@@ -47,9 +47,7 @@
                                size="30",
                                type="text",
                                placeholder="Name" />
-                    </div>
-                    
-                    <div class="input-group">
+
                         <label for="surname" class="sr-only">Surname:</label>
                         <input id="surname",
                                name="surname",
