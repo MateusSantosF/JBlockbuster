@@ -18,18 +18,7 @@ public class Gender extends BaseEntity{
         this.Description = Description;
     }
     
-     @Override
-    public String getColumnsName() {
-        Field[] fields = this.getClass().getDeclaredFields();
-        StringBuilder stb = new StringBuilder();
  
-        for (Field field : fields) {
-            stb.append(field.getName());
-            stb.append(",");
-        }
-        stb.deleteCharAt(stb.length() - 1);
-        return stb.toString();
-    }
     
 
     

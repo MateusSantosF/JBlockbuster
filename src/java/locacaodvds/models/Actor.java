@@ -1,7 +1,6 @@
 
 package locacaodvds.models;
 
-import java.lang.reflect.Field;
 import java.sql.Date;
 
 
@@ -41,18 +40,7 @@ public class Actor extends BaseEntity {
     }
     
     
-    @Override
-    public String getColumnsName() {
-        Field[] fields = this.getClass().getDeclaredFields();
-        StringBuilder stb = new StringBuilder();
-  
-        for (Field field : fields) {
-            stb.append(field.getName());
-            stb.append(",");
-        }
-        stb.deleteCharAt(stb.length() - 1);
-        return stb.toString();
-    }
+
     
 
     

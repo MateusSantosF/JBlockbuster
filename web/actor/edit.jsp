@@ -48,8 +48,7 @@
                                size="1"
                                type="text"
                                value="${requestScope.actor.name}"
-                               placeholder="Name" />
-                        
+                               placeholder="Name" />                
                         <label for="surname" class="sr-only">Surname:</label>
                         <input id="surname"
                                name="surname"
@@ -59,7 +58,9 @@
                                type="text"
                                value="${requestScope.actor.surname}"
                                placeholder="Surname" />
-                        
+                    </div>
+                               
+                    <div class="input-group">
                         <label for="premiereDate" class="sr-only">Premiere Date:</label>
                         <input id="premiereDate"
                                name="premiereDate"
@@ -70,7 +71,7 @@
                                value="${requestScope.actor.premiereDate}"
                                onfocus="(this.type='date')",
                                onblur="(this.type='text')",
-                               placeholder="yyyy-MM-dddd" />
+                               placeholder="Premiere Date" />
                     </div>
                     <div class="input-group">
                         <a  class="back-btn" href="${cp}/actor/list.jsp">BACK<a/>

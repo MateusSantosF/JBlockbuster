@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
 <c:set var="prefix" value="dvd?action="/>
 
@@ -63,8 +64,12 @@
                                  <tr>
                                     <td>${dvd.id}</td>
                                     <td>${dvd.title}</td>
-                                    <td>${dvd.releaseYear}</td>
-                                    <td>${dvd.releaseDate}</td>
+                                    <td>${dvd.releaseYear}</td>                         
+                                    <td>
+                                        <fmt:formatDate
+                                        pattern="dd/MM/yyyy"
+                                        value="${dvd.releaseDate}"/>                            
+                                    </td>
                                     <td>${dvd.mainActor.name}</td>
                                     <td>${dvd.supportingActor.name}</td>
                                     <td>${dvd.duration} Min</td>
@@ -72,11 +77,11 @@
                                     <td>${dvd.ageRating.description}</td>
                                     <td>
                                         <div class="buttons-contianer">
-                                            <a class="btn" href="${cp}/${prefix}prepareChange&id=${agerating.id}">
+                                            <a class="btn" href="${cp}/${prefix}prepareChange&id=${dvd.id}">
                                                 <img src="${cp}/src/images/edit.svg">
                                             </a>
                                             <a class="btn"
-                                               href="${cp}/${prefix}prepareDelete&id=${agerating.id}">
+                                               href="${cp}/${prefix}prepareDelete&id=${dvd.id}">
                                                 <img src="${cp}/src/images/delete.svg">
                                             </a>
                                         </div>

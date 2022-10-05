@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${cp}/src/styles/main.css"/>
         <link rel="stylesheet" href="${cp}/src/styles/global.css"/> 
-        <link rel="stylesheet" href="${cp}/src/styles/forms.css"/> 
+        <link rel="stylesheet" href="${cp}/src/styles/dvdForm.css"/> 
         <title>DvDs</title>
     </head>
 
@@ -33,22 +33,27 @@
 
         <main>
             <div class="container form">
-                <h2>Really want to delete?</h2>
-                
-                <form method="post" action="${cp}/agerating">
+               
+                <form method="post" action="${cp}/dvd">
                     <input name="action" type="hidden" value="delete"/> 
-                    <input name="id" type="hidden" value="${requestScope.agerating.id}"/>
+                    <input name="id" type="hidden" value="${requestScope.dvd.id}"/>
                     
                     <div class="model-info-container">
+                         <h2>Really want to delete?</h2>           
                         <ul>
                             <li><span>Id: </span>${requestScope.dvd.id}</li>
-                            <li><span>Description: </span>${requestScope.dvd.title}</li>
-                            <li><span>Id: </span>${requestScope.dvd.releaseYear}</li>
-                            <li><span>Description: </span>${requestScope.dvd.releaseDate}</li>
+                            <li><span>Title: </span>${requestScope.dvd.title}</li>
+                            <li><span>Release Year: </span>${requestScope.dvd.releaseYear}</li>
+                            <li><span>Release Date: </span>${requestScope.dvd.releaseDate}</li>
+                            <li><span>Main Actor: </span>${requestScope.dvd.mainActor.name}</li>
+                            <li><span>Supporting Actor: </span>${requestScope.dvd.supportingActor.name}</li>
+                            <li><span>Duration: </span>${requestScope.dvd.duration}</li>
+                            <li><span>Gender: </span>${requestScope.dvd.gender.description}</li>
+                            <li><span>Age Rating: </span>${requestScope.dvd.ageRating.description}</li>
                         </ul>
-                    <div>
+                    </div>
                     <div class="input-group">
-                         <a  class="back-btn" href="${cp}/dvd/list.jsp">BACK<a/>
+                         <a class="back-btn" href="${cp}/dvd/list.jsp">BACK<a/>
                         <input type="submit" class="btn-delete" value="DELETE" />
                     </div>      
                 </form>

@@ -70,7 +70,7 @@
                                type="text" ,
                                onfocus="(this.type='date')",
                                onblur="(this.type='text')",
-                               placeholder="yyyy-MM-dddd" />
+                               placeholder="Premiere Date" />
                     </div>
                     
                       <div class="input-group">

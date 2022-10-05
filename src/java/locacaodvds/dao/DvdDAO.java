@@ -29,11 +29,11 @@ public class DvdDAO extends DAO<Dvd> {
                 + "    title, "
                 + "    releaseYear, "
                 + "    releaseDate, "
-                + "    mainActor_id, "
-                + "    supportingActor_id, "
+                + "    mainActorFK, "
+                + "    supportingActorFK, "
                 + "    duration, "
-                + "    gender_id, "
-                + "    ageRating) "
+                + "    genderFK, "
+                + "    ageRatingFK) "
                 + "VALUES( ?, ?, ?, ?, ?, ?, ?, ? );");
         stmt.setString(1, model.getTitle());
         stmt.setString(2, model.getReleaseYear());
@@ -42,7 +42,7 @@ public class DvdDAO extends DAO<Dvd> {
         stmt.setInt(5, model.getSupportingActor().getId());
         stmt.setLong(6, model.getDuration());
         stmt.setInt(7, model.getGender().getId());
-        stmt.setInt(8, model.getAgeClassification().getId());
+        stmt.setInt(8, model.getAgeRating().getId());
 
         stmt.executeUpdate();
         stmt.close();
@@ -57,12 +57,12 @@ public class DvdDAO extends DAO<Dvd> {
                 + "SET"
                 + "    title = ?, "
                 + "    releaseYear =?, "
-                + "    releaseDate = ? "
-                + "    mainActor_id = ? "
-                + "    supportingActor_id = ? "
-                + "    duration = ? "
-                + "    gender_id = ? "
-                + "    ageRating = ? "
+                + "    releaseDate = ?, "
+                + "    mainActorFK = ?, "
+                + "    supportingActorFK = ?, "
+                + "    duration = ?, "
+                + "    genderFK = ?, "
+                + "    ageRatingFK = ? "
                 + "WHERE id = ?;");
 
         stmt.setString(1, model.getTitle());
@@ -72,7 +72,7 @@ public class DvdDAO extends DAO<Dvd> {
         stmt.setInt(5, model.getSupportingActor().getId());
         stmt.setLong(6, model.getDuration());
         stmt.setInt(7, model.getGender().getId());
-        stmt.setInt(8, model.getAgeClassification().getId());
+        stmt.setInt(8, model.getAgeRating().getId());
         stmt.setInt(9, model.getId());
 
         stmt.executeUpdate();
@@ -155,7 +155,7 @@ public class DvdDAO extends DAO<Dvd> {
             dvd.setDuration(rs.getLong("duration"));
  
             dvd.setGender(gender);
-            dvd.setAgeClassification(ageRating);
+            dvd.setAgeRating(ageRating);
             dvd.setMainActor(mainActor);
             dvd.setSupportingActor(supportingActor);
 
@@ -234,7 +234,7 @@ public class DvdDAO extends DAO<Dvd> {
             dvd.setDuration(rs.getLong("duration"));
  
             dvd.setGender(gender);
-            dvd.setAgeClassification(ageRating);
+            dvd.setAgeRating(ageRating);
             dvd.setMainActor(mainActor);
             dvd.setSupportingActor(supportingActor);
         }

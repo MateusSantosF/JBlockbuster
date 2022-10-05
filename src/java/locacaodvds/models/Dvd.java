@@ -1,9 +1,6 @@
 
 package locacaodvds.models;
-
-import java.lang.reflect.Field;
 import java.sql.Date;
-import java.sql.Time;
 
 /**
  *
@@ -18,7 +15,7 @@ public class Dvd extends BaseEntity{
     private Actor supportingActor;
     private long duration;
     private Gender gender;
-    private AgeRating ageClassification;
+    private AgeRating ageRating;
 
 
     public String getTitle() {
@@ -69,8 +66,6 @@ public class Dvd extends BaseEntity{
         this.supportingActor = supportingActor;
     }
 
-
-
     public Gender getGender() {
         return gender;
     }
@@ -79,26 +74,11 @@ public class Dvd extends BaseEntity{
         this.gender = gender;
     }
 
-    public AgeRating getAgeClassification() {
-        return ageClassification;
+    public AgeRating getAgeRating() {
+        return ageRating;
     }
 
-    public void setAgeClassification(AgeRating ageClassification) {
-        this.ageClassification = ageClassification;
-    }
-
-    @Override
-    public String getColumnsName() {
-        Field[] fields = this.getClass().getDeclaredFields();
-        StringBuilder stb = new StringBuilder();
-      
-        for (Field field : fields) {
-            stb.append(field.getName());
-            stb.append(",");
-        }
-        stb.deleteCharAt(stb.length() - 1);
-        return stb.toString();
-    }
- 
-     
+    public void setAgeRating(AgeRating ageRating) {
+        this.ageRating = ageRating;
+    }   
 }

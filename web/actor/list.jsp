@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="cp" value="${pageContext.request.contextPath}"/>
 <c:set var="prefix" value="actor?action="/>
 
@@ -59,7 +60,11 @@
                                     <td>${actor.id}</td>
                                     <td>${actor.name}</td>
                                     <td>${actor.surname}</td>
-                                    <td>${actor.premiereDate}</td>
+                                    <td>
+                                        <fmt:formatDate
+                                        pattern="dd/MM/yyyy"
+                                        value="${actor.premiereDate}"/>
+                                    </td>
                                     <td>
                                         <div class="buttons-contianer">
                                             <a class="btn" href="${cp}/${prefix}prepareChange&id=${actor.id}">

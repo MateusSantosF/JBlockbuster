@@ -18,7 +18,6 @@ public abstract class BaseEntity {
         this.id = id;
     }
     
-    public abstract String getColumnsName();
     
 
     
